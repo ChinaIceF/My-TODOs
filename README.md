@@ -5,4 +5,4 @@
   </a>
   
   <h2 align="center">My-TODOs</h2>
-  <p align="center">基于 PyQt-SiliconUI 编写的跨平台待办桌面工具</p>
+  <p align="center">基于 PyQt-SiliconUI 编写的跨平台桌面待办小工具</p>
