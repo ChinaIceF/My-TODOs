@@ -1,0 +1,1 @@
+from siui.core.globals.globals import SiGlobal, NewGlobal

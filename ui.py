@@ -3,7 +3,7 @@ import os
 from components import ThemedOptionCardPlane
 from icons import IconDictionary
 from PyQt5.Qt import QColor, QPoint
-from PyQt5.QtCore import Qt, pyqtSignal
+from PyQt5.QtCore import Qt, pyqtSignal, QCoreApplication
 from PyQt5.QtWidgets import QGraphicsDropShadowEffect, QMainWindow, QTextEdit
 from settings_parser import SettingsParser
 from todos_parser import TODOParser
@@ -573,7 +573,7 @@ class TODOApplication(QMainWindow):
         self.fixed_position = QPoint(SiGlobal.todo_list.settings_parser.options["FIXED_POSITION_X"],
                                      SiGlobal.todo_list.settings_parser.options["FIXED_POSITION_Y"])
 
-        self.setWindowFlags(Qt.FramelessWindowHint)
+        self.setWindowFlags(Qt.FramelessWindowHint | Qt.Tool)
         self.setAttribute(Qt.WA_TranslucentBackground)  # 设置窗口背景透明
 
         # 初始化全局变量
@@ -784,3 +784,6 @@ class TODOApplication(QMainWindow):
         SiGlobal.todo_list.settings_parser.modify("FIXED_POSITION_X", self.fixed_position.x())
         SiGlobal.todo_list.settings_parser.modify("FIXED_POSITION_Y", self.fixed_position.y())
         SiGlobal.todo_list.settings_parser.write()
+
+        SiGlobal.siui.windows["TOOL_TIP"].close()
+        QCoreApplication.quit()
