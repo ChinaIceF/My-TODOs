@@ -1,7 +1,7 @@
 <p align="center">  
   
   <a href="#">
-    <img src="https://github.com/ChinaIceF/My-TODOs/blob/main/assets/readme/my-todos.png?raw=true" alt="Logo"  >
+    <img src="https://github.com/ChinaIceF/My-TODOs/blob/main/assets/readme/my-todos.png?raw=true" alt="head-image"  >
   </a>
   
   <h2 align="center">My-TODOs</h2>
@@ -9,7 +9,7 @@
 
 
 ### 如何使用
-* 在右侧下载最新的 Release，下载应用压缩包，解压并运行即可
+* 在右侧下载最新的 Release，解压并运行即可
 * 如果你需要开机自启，请参照网上的方法将本应用添加到自启
 
 ### 调试与开发
