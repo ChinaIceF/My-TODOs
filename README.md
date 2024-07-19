@@ -5,7 +5,7 @@
   </a>
   
   <h2 align="center">My-TODOs</h2>
-  <p align="center">基于 PyQt-SiliconUI 编写的跨平台桌面待办小工具</p>
+  <p align="center">基于 <a href="https://github.com/ChinaIceF/PyQt-SiliconUI/">PyQt-SiliconUI</a> 编写的跨平台桌面待办小工具</p>
 
 
 ### 如何使用
@@ -18,9 +18,6 @@
 Pyinstaller start.py --noconsole
 ```
 编译完成后，你需要移动`options.ini` `todos.ini` `./icons/icons.dat`到可执行文件所在目录，这可能因为平台不同有不同情况，因此还需结合您的报错信息动态调整
-
-### 调试与开发
-如果你要进行调试源代码，你需要下载 [PyQt-Silicon](https://github.com/ChinaIceF/PyQt-SiliconUI/) 中的 `siui` 包并放置在工作目录后再进行调试工作
 
 ### 第三方资源
 本项目使用了部分来自 [FlatIcon](https://flaticon.com) 的图标。 
