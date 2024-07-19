@@ -6,6 +6,7 @@ from PyQt5.Qt import QColor, QPoint
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtWidgets import QGraphicsDropShadowEffect, QMainWindow, QTextEdit
 from settings_parser import SettingsParser
+from todos_parser import TODOParser
 
 from siui.components.widgets import (
     SiCheckBox,
@@ -31,7 +32,7 @@ SiGlobal.todo_list.position_locked = False
 
 # 创建设置文件解析器并写入全局变量
 SiGlobal.todo_list.settings_parser = SettingsParser("./options.ini")
-
+SiGlobal.todo_list.todos_parser = TODOParser("./todos.ini")
 
 def lock_position(state):
     SiGlobal.todo_list.position_locked = state
@@ -473,13 +474,13 @@ class SettingsPanel(ThemedOptionCardPlane):
 
         # 许可
         self.license = SingleSettingOption(self)
-        self.license.setTitle("开源许可证", "本项目采用 GPL v3.0 协议，严禁用于商业")
+        self.license.setTitle("开源许可证", "本项目采用 GNU General Public License v3.0")
 
         self.button_license = SiSimpleButton(self)
         self.button_license.setFixedHeight(32)
         self.button_license.attachment().setText("在 Github 上查看")
         self.button_license.clicked.connect(
-            lambda: os.system("start https://github.com/ChinaIceF/PyQt-SiliconUI/blob/main/LICENSE"))
+            lambda: os.system("start https://github.com/ChinaIceF/My-TODOs/blob/main/LICENSE"))
         self.button_license.adjustSize()
 
         self.license.addWidget(self.button_license)
@@ -517,7 +518,7 @@ class SettingsPanel(ThemedOptionCardPlane):
         self.button_donation = SiSimpleButton(self)
         self.button_donation.setFixedHeight(32)
         self.button_donation.attachment().setText("在 Github 上扫码赞助")
-        self.button_donation.clicked.connect(lambda: os.system("start https://github.com/ChinaIceF/PyQt-SiliconUI"))
+        self.button_donation.clicked.connect(lambda: os.system("start https://github.com/ChinaIceF/My-TODOs?tab=readme-ov-file#%E8%B5%9E%E5%8A%A9"))
         self.button_donation.adjustSize()
 
         self.donation.addWidget(self.button_donation)
@@ -664,6 +665,11 @@ class TODOApplication(QMainWindow):
         self.move(self.fixed_position.x(), self.fixed_position.y())
         SiGlobal.siui.reloadAllWindowsStyleSheet()
 
+        # 读取 todos.ini 添加到待办
+        for todo in SiGlobal.todo_list.todos_parser.todos:
+            self.todo_list_panel.addTODO(todo)
+
+
     def adjustSize(self):
         h = (self.header_panel.height() + 12 +
              self.settings_panel.height() + 12 +
@@ -768,6 +774,13 @@ class TODOApplication(QMainWindow):
 
     def closeEvent(self, a0):
         super().closeEvent(a0)
+
+        # 获取当前待办，并写入 todos.ini
+        todos = [widget.text_label.text() for widget in self.todo_list_panel.body().widgets_top]
+        SiGlobal.todo_list.todos_parser.todos = todos
+        SiGlobal.todo_list.todos_parser.write()
+
+        # 写入设置到 options.ini
         SiGlobal.todo_list.settings_parser.modify("FIXED_POSITION_X", self.fixed_position.x())
         SiGlobal.todo_list.settings_parser.modify("FIXED_POSITION_Y", self.fixed_position.y())
         SiGlobal.todo_list.settings_parser.write()
