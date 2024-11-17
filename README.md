@@ -25,10 +25,3 @@ Pyinstaller start.py --noconsole
 ### License
 本项目采用 GPL v3.0 license，转载时需注明项目链接
 
-### 赞助
-如果你喜欢本项目的话，可以扫描下方的二维码赞助我，您的支持与鼓励就是我最大的动力  
-
-
-<a href="#">
- <img src="https://github.com/ChinaIceF/My-TODOs/blob/main/assets/readme/payments.png?raw=true" alt="payments"  >
-</a>
